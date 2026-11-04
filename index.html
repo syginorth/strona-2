@@ -1,0 +1,1479 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Forhend — Klub & Akademia Tenisowa</title>
+<meta name="description" content="Forhend — klub i akademia tenisowa we Wrocławiu. Treningi dla dzieci i dorosłych, grupa wyczynowa, lekcje indywidualne i 8 kortów turniejowych.">
+<meta name="theme-color" content="#0f2f63">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f2f63' stroke-width='1.8' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M4.8 5.6A9 9 0 0 0 4.8 18.4'/%3E%3Cpath d='M19.2 5.6a9 9 0 0 1 0 12.8'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="https://api.getlayers.ai/storage/v1/object/public/public/assets/baseline-88535e4000/hero/hero-court.webp" fetchpriority="high">
+<script type="importmap">
+{ "imports": { "lenis": "https://cdn.jsdelivr.net/npm/lenis@1.1.18/+esm" } }
+</script>
+<style>
+:root{
+  --background:#ffffff; --foreground:#0a0a0a;
+  --brand:#2563c9; --brand-deep:#0f2f63; --brand-light:#5790e6; --accent-teal:#0b6e97;
+  --surface:#f4f4f4; --surface-card:#ffffff;
+  --ink:#0a0a0a; --ink-soft:#717784; --ghost:#d7dae1; --hairline:#e6e8ec; --on-brand:#ffffff;
+  --danger:#c4352b;
+  --radius-card:1.5rem; --radius-card-lg:2rem; --radius-pill:62.5rem; --radius-xl:.75rem;
+  --ease-out-expo:cubic-bezier(.16,1,.3,1);
+  --ease-out-quart:cubic-bezier(.25,1,.5,1);
+  --ease-in-out-cubic:cubic-bezier(.65,0,.35,1);
+}
+/* adaptive rem grid */
+html{font-size:16px;scrollbar-gutter:stable}
+@media (max-width:1920px){html{font-size:.833333vw}}
+@media (max-width:1440px){html{font-size:1.111111vw}}
+@media (max-width:1024px){html{font-size:1.5625vw}}
+@media (max-width:640px){html{font-size:4.444444vw}}
+
+/* lenis */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
+.lenis.lenis-stopped{overflow:hidden}
+
+/* reset */
+*,*::before,*::after{box-sizing:border-box}
+*{margin:0}
+img{display:block;max-width:100%}
+ul,ol{padding:0;list-style:none}
+a{color:inherit;text-decoration:none}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0;padding:0}
+body{min-height:100vh;background:var(--background);color:var(--foreground);font-family:"Onest",system-ui,sans-serif;font-weight:400;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+:focus-visible{outline:2px solid var(--brand-light);outline-offset:2px}
+[hidden]{display:none!important}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.stretched{position:absolute;inset:0;z-index:2;border-radius:inherit}
+
+main{width:100%;overflow-x:clip;padding:.5rem}
+@media (min-width:640px){main{padding:.75rem}}
+
+/* ---------- reveal primitives ---------- */
+.clip{display:inline-block;overflow:hidden;vertical-align:top;padding:.14em 0;margin:-.14em 0}
+.clip>span{display:inline-block;transform:translateY(115%);opacity:0;will-change:transform;
+  transition:transform var(--dur,950ms) var(--ease,var(--ease-out-expo)) var(--d,0ms),opacity var(--dur,950ms) var(--ease,var(--ease-out-expo)) var(--d,0ms)}
+.lines>.clip{display:block}
+.is-in .clip>span,.clip.is-in>span{transform:translateY(0);opacity:1}
+.no-tr .clip>span,.clip.no-tr>span,.no-tr.fw>span,.no-tr .fw>span{transition:none!important}
+.fw>span{display:inline-block;transform:translateY(18px);opacity:0;transition:transform 700ms var(--ease-out-quart) var(--d,0ms),opacity 700ms var(--ease-out-quart) var(--d,0ms)}
+.fw.is-in>span{transform:none;opacity:1}
+
+/* ---------- shared ui ---------- */
+.eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.75rem;line-height:1rem;font-weight:500;text-transform:uppercase;letter-spacing:.22em}
+.eyebrow::before{content:"";width:.375rem;height:.375rem;border-radius:var(--radius-pill);flex:none}
+.eyebrow--dark{color:var(--ink-soft)}.eyebrow--dark::before{background:var(--brand)}
+.eyebrow--light{color:rgba(255,255,255,.7)}.eyebrow--light::before{background:var(--brand-light)}
+
+.pill{display:inline-flex;align-items:center;gap:.5rem;border-radius:var(--radius-pill);padding:.875rem 1.75rem;font-size:.875rem;line-height:1.25rem;font-weight:500;text-transform:uppercase;letter-spacing:.025em;transition:background-color .25s,color .25s,border-color .25s;border:1px solid transparent;white-space:nowrap}
+.pill:focus-visible{outline:2px solid var(--brand-light);outline-offset:3px}
+.pill svg{width:1rem;height:1rem;display:block}
+.pill .pa{display:inline-block}
+.pill--light{background:#fff;color:var(--brand-deep)}
+.pill--light:hover{background:var(--brand-light);color:#fff}
+.pill--solid{background:var(--ink);color:#fff}
+.pill--solid:hover{background:var(--brand-deep)}
+.pill--outline{border-color:currentColor;color:var(--ink)}
+.pill--outline:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.pill[disabled]{opacity:.55;pointer-events:none}
+
+.arrow-btn{display:grid;place-items:center;width:3rem;height:3rem;border-radius:var(--radius-pill);border:1px solid;transition:background-color .25s,border-color .25s,color .25s}
+@media (min-width:640px){.arrow-btn{width:3.5rem;height:3.5rem}}
+.arrow-btn svg{width:1.25rem;height:1.25rem;display:block}
+.arrow-btn .ai{display:block}
+.arrow-btn--outline{border-color:var(--hairline);background:transparent;color:var(--ink)}
+.arrow-btn--outline:hover{border-color:var(--ink)}
+.arrow-btn--solid{background:var(--ink);border-color:var(--ink);color:#fff}
+.arrow-btn--solid:hover{background:var(--brand-deep);border-color:var(--brand-deep)}
+.flip{transform:scaleX(-1)}
+
+.dots{display:flex;align-items:center;gap:.5rem}
+.dot{padding:.375rem;display:block}
+.dot i{display:block;height:.375rem;width:.375rem;border-radius:var(--radius-pill);transition:width .45s var(--ease-out-expo),background-color .3s}
+.dots--dark .dot i{background:var(--ghost)}
+.dots--dark .dot[aria-current="true"] i{width:1.25rem;background:var(--ink)}
+.dots--light .dot i{background:rgba(255,255,255,.4)}
+.dots--light .dot[aria-current="true"] i{width:1.25rem;background:#fff}
+.dot:hover i{background:var(--brand-light)}
+
+.icon-btn{display:grid;place-items:center;width:2.5rem;height:2.5rem;border-radius:var(--radius-pill);transition:background-color .25s;flex:none}
+.icon-btn svg{width:1rem;height:1rem;display:block}
+.icon-btn .xi{display:block}
+
+.mark{display:block;flex:none}
+.brand{display:inline-flex;align-items:center;gap:.5rem;font-weight:500;text-transform:uppercase;letter-spacing:.2em}
+
+/* ---------- header ---------- */
+.site-header{position:relative;z-index:10;display:flex;align-items:center;padding:1.5rem 1.5rem 0;font-size:.75rem;line-height:1rem;color:#fff}
+@media (min-width:640px){.site-header{padding:2rem 2.5rem 0}}
+.site-header__nav{display:none;flex:1;gap:2rem}
+.site-header__nav a{color:rgba(255,255,255,.9);text-transform:uppercase;letter-spacing:.025em;transition:color .2s}
+.site-header__nav a:hover{color:#fff}
+.site-header__brand{flex:1;display:flex}
+.site-header__brand .brand{font-size:1rem;line-height:1.5rem}
+.site-header__brand .mark{width:1.25rem;height:1.25rem}
+.site-header__right{flex:1;display:flex;justify-content:flex-end;align-items:center;gap:1rem}
+.site-header__book{display:none;text-transform:uppercase;letter-spacing:.025em;text-underline-offset:4px}
+.site-header__book:hover{text-decoration:underline}
+@media (min-width:640px){.site-header__book{display:inline}.site-header__right{gap:1.25rem}}
+@media (min-width:1024px){.site-header__nav{display:flex}.site-header__brand{justify-content:center}}
+.burger{display:grid;place-items:center;width:2.5rem;height:2.5rem;border-radius:var(--radius-pill);background:rgba(255,255,255,.15);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:background-color .25s}
+.burger:hover{background:rgba(255,255,255,.25)}
+.burger span{display:flex;flex-direction:column;gap:5px}
+.burger i{display:block;width:1rem;height:1px;background:#fff}
+
+/* ---------- hero ---------- */
+.hero{position:relative;isolation:isolate;overflow:hidden;background:var(--brand-deep);color:#fff;border-radius:var(--radius-card-lg);height:calc(100svh - 1rem);min-height:36rem;display:flex;flex-direction:column}
+@media (min-width:640px){.hero{height:calc(100svh - 1.5rem)}}
+.hero__plate{position:absolute;inset:0;z-index:-10}
+.hero__plate-inner{position:absolute;left:0;right:0;top:-16%;height:132%;width:100%;will-change:transform}
+.hero__plate-inner img{width:100%;height:100%;object-fit:cover}
+.hero__plate::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(15,47,99,.65),rgba(15,47,99,.35),rgba(15,47,99,.75))}
+.hero__title-wrap{padding:1rem 1.5rem 0}
+@media (min-width:640px){.hero__title-wrap{padding-left:2.5rem;padding-right:2.5rem}}
+.hero__title{font-size:12.5vw;font-weight:500;text-transform:uppercase;line-height:.85;letter-spacing:-.02em;white-space:nowrap}
+.hero__title .clip>span{--dur:1100ms}
+.hero__bottom{margin-top:auto;padding:0 1.5rem 2rem;display:flex;flex-direction:column;gap:1.5rem}
+@media (min-width:640px){.hero__bottom{flex-direction:row;justify-content:space-between;align-items:flex-end;padding:0 2.5rem 2.5rem}}
+.hero__tagline{font-size:2.4rem;font-weight:500;text-transform:uppercase;line-height:.95;letter-spacing:-.025em;color:rgba(255,255,255,.85)}
+.hero__tagline .clip>span{--dur:900ms}
+.hero__cluster{display:flex;align-items:flex-end;gap:1rem}
+.glass{border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.1);padding:.75rem;border-radius:var(--radius-card);box-shadow:0 10px 15px -3px rgba(15,47,99,.2),0 4px 6px -4px rgba(15,47,99,.2);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.coll{display:none;width:16rem;flex-direction:column;gap:.75rem}
+@media (min-width:768px){.coll{display:flex}}
+.coll__stack{display:grid}
+.coll__card{grid-area:1/1;display:flex;gap:.75rem;align-items:center}
+.coll__img{width:3.5rem;height:3.5rem;border-radius:var(--radius-xl);object-fit:cover;flex:none;background:rgba(255,255,255,.1)}
+.coll__brand{font-size:.7rem;font-weight:500;text-transform:uppercase;letter-spacing:.025em;line-height:1.3}
+.coll__title{font-size:.7rem;text-transform:uppercase;opacity:.8;line-height:1.3}
+.coll__cta{display:inline-block;margin-top:.25rem;font-size:.65rem;text-decoration:underline;text-underline-offset:3px;transition:color .2s}
+.coll__cta:hover{color:var(--brand-light)}
+.member{position:relative;width:100%;max-width:20rem;display:flex;gap:.75rem;align-items:stretch;transition:border-color .25s,background-color .25s}
+.member:hover{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.14)}
+@media (min-width:640px){.member{max-width:15rem}}
+.member__left{display:flex;flex-direction:column;justify-content:space-between;flex:1;gap:.5rem}
+.member__val{font-size:1.875rem;font-weight:500;line-height:1}
+.avatars{display:flex}
+.avatars i{display:block;width:1.25rem;height:1.25rem;border-radius:var(--radius-pill);border:1px solid rgba(15,47,99,.4)}
+.avatars i+i{margin-left:-.5rem}
+.member__cap{font-size:.65rem;opacity:.8}
+.member__img{width:4rem;aspect-ratio:3/4;border-radius:var(--radius-xl);object-fit:cover;flex:none;background:rgba(255,255,255,.1)}
+
+/* ---------- trust ---------- */
+.trust{position:relative;isolation:isolate;overflow:hidden;background:var(--background);padding:4rem 1.5rem}
+@media (min-width:640px){.trust{padding:5rem 2.5rem}}
+.trust__top{position:relative;z-index:20;display:flex;flex-direction:column;gap:1rem}
+@media (min-width:640px){.trust__top{flex-direction:row;justify-content:space-between;align-items:flex-start}}
+.pct{display:grid;place-items:center;align-content:center;width:7rem;height:7rem;border-radius:var(--radius-pill);background:var(--surface);text-align:center}
+@media (min-width:640px){.pct{width:8rem;height:8rem}}
+.pct b{font-size:1.5rem;line-height:2rem;font-weight:500}
+.pct small{font-size:.6rem;color:var(--ink-soft);max-width:7em;line-height:1.3;margin:.15rem auto 0}
+.badge{display:flex;gap:1rem;max-width:28rem;border-radius:var(--radius-card);background:var(--surface);padding:1.25rem;align-items:flex-start}
+@media (min-width:640px){.badge{gap:1.25rem;padding:1.5rem}}
+.badge__chip{border-radius:var(--radius-xl);background:var(--background);padding:.5rem 1rem;font-size:1.25rem;line-height:1.75rem;font-weight:500;flex:none}
+.badge h3{font-size:1.125rem;line-height:1.75rem;font-weight:500}
+.badge p{font-size:.75rem;color:var(--ink-soft);line-height:1.625;margin-top:.25rem}
+.ghost-h{position:relative;z-index:0;pointer-events:none;user-select:none;-webkit-user-select:none;max-width:88rem;margin:3rem auto 0;font-size:8.2vw;font-weight:500;text-transform:uppercase;line-height:1.02;letter-spacing:-.025em}
+.ghost-h .row{display:flex;justify-content:space-between}
+.gw{display:inline-block;will-change:transform}
+.gw .clip{padding:.12em 0;margin:-.12em 0}
+.gw .clip>span{--dur:700ms}
+.gw--ghost{color:var(--ghost)}
+.gw--ink{color:var(--ink)}
+.coach-pos{position:relative;z-index:10;width:13rem;margin:2.5rem auto 0}
+@media (min-width:640px){.coach-pos{position:absolute;left:50%;top:50%;width:16rem;margin:0;transform:translate(-50%,-50%)}}
+.coach{position:relative;transform:rotate(6deg);aspect-ratio:3/4;border-radius:var(--radius-card);background:var(--brand);overflow:hidden;box-shadow:0 30px 60px -25px rgba(15,47,99,.45)}
+.coach__imgs{position:absolute;inset:0}
+.coach__imgs img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cap{position:absolute;left:.75rem;right:.75rem;bottom:.75rem;border-radius:var(--radius-xl);color:#fff;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:1}
+.coach .cap{background:rgba(15,47,99,.4);padding:.5rem .75rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.cap__name{display:block;font-size:.875rem;line-height:1.25rem;font-weight:500}
+.cap__role{display:block;font-size:.65rem;opacity:.8}
+.cap__go{width:1.75rem;height:1.75rem;border-radius:var(--radius-pill);display:grid;place-items:center;background:rgba(255,255,255,.15);flex:none;transition:background-color .25s}
+.cap__go svg{width:.875rem;height:.875rem}
+.coach:hover .cap__go{background:#fff;color:var(--brand-deep)}
+.trust__ctrl{position:relative;z-index:20;margin-top:3rem;display:flex;align-items:center;justify-content:space-between}
+@media (min-width:640px){.trust__ctrl{margin-top:6rem}}
+
+/* ---------- programs ---------- */
+.programs{background:var(--surface);padding:6rem 1.5rem}
+@media (min-width:640px){.programs{padding:6rem 2.5rem}}
+.h2{font-size:3rem;font-weight:500;line-height:.95;letter-spacing:-.025em;margin-top:1rem}
+.prog-list{margin-top:3.5rem}
+.prog-list li{border-top:1px solid var(--hairline)}
+.prog-list li:last-child{border-bottom:1px solid var(--hairline)}
+.prog{display:block;outline-offset:-2px;transition:background-color .25s}
+.prog:focus-visible{background:var(--background)}
+.prog__in{display:flex;gap:1.5rem;align-items:center;padding:1.75rem 0}
+.prog__idx{width:2.5rem;font-size:.875rem;font-weight:500;color:var(--ink-soft);flex:none}
+.prog__txt{flex:1;min-width:0}
+.prog__name{display:block;font-size:1.5rem;line-height:2rem;font-weight:500;letter-spacing:-.025em}
+@media (min-width:640px){.prog__name{font-size:1.875rem;line-height:2.25rem}}
+.prog__desc{display:block;font-size:.875rem;line-height:1.25rem;color:var(--ink-soft);margin-top:.25rem}
+.prog__arrow{display:grid;place-items:center;width:2.75rem;height:2.75rem;border-radius:var(--radius-pill);border:1px solid var(--hairline);flex:none;transition:border-color .25s}
+.prog:hover .prog__arrow{border-color:var(--ink)}
+.prog__arrow svg{width:1.125rem;height:1.125rem}
+.prog__arrow .pa{display:block}
+
+/* ---------- facilities ---------- */
+.facilities{position:relative;z-index:1;background:var(--background);border-radius:var(--radius-card-lg);margin-top:-2.5rem;padding:4rem 1.5rem 5rem}
+@media (min-width:640px){.facilities{padding-left:2.5rem;padding-right:2.5rem}}
+.fac-grid{display:grid;grid-template-columns:1fr;align-items:end;gap:2.5rem}
+@media (min-width:768px){.fac-grid{grid-template-columns:1fr 1fr}}
+.fac-intro{max-width:24rem}
+.fac-icon{width:4rem;height:4rem;border-radius:var(--radius-card);object-fit:cover;background:var(--surface)}
+.fac-intro .h2{margin-top:1.5rem}
+.fac-body{font-size:.875rem;line-height:1.25rem;color:var(--ink-soft);max-width:20rem;margin-top:1.5rem}
+.courts{display:flex;align-items:flex-end;gap:1.25rem}
+.courts>div{flex:1;min-width:0}
+.courts>div:nth-child(2){margin-bottom:2rem}
+.court{position:relative;aspect-ratio:3/4;border-radius:var(--radius-card);overflow:hidden;background:var(--surface);isolation:isolate}
+.court__img{position:absolute;inset:0;will-change:transform}
+.court__img img{width:100%;height:100%;object-fit:cover}
+.court .cap{padding:.75rem 1rem}
+.court .cap--clay{background:rgba(15,47,99,.4)}
+.court .cap--blue{background:rgba(11,110,151,.55)}
+.court .cap__desc{display:block;font-size:.65rem;opacity:.85;margin-top:.125rem;line-height:1.35}
+.court__book{position:absolute;top:.75rem;right:.75rem;z-index:1;font-size:.65rem;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--brand-deep);background:#fff;border-radius:var(--radius-pill);padding:.4rem .7rem;opacity:0;transform:translateY(-4px);transition:opacity .3s,transform .3s var(--ease-out-expo)}
+.court:hover .court__book,.court:focus-within .court__book{opacity:1;transform:none}
+@media (max-width:768px){.court__book{opacity:1;transform:none}}
+@media (max-width:639px){.court__book{display:none}.court .cap{padding:.5rem .625rem}.court .cap__desc{display:none}}
+
+/* ---------- stats ---------- */
+.stats{background:var(--brand-deep);color:#fff;border-radius:var(--radius-card-lg);margin-top:.75rem;padding:5rem 1.5rem}
+@media (min-width:640px){.stats{padding:5rem 2.5rem}}
+.stats__grid{display:grid;grid-template-columns:repeat(2,1fr);column-gap:2rem;row-gap:3rem;margin-top:4rem}
+@media (min-width:1024px){.stats__grid{grid-template-columns:repeat(4,1fr)}}
+.stat{border-top:1px solid rgba(255,255,255,.2);padding-top:1.25rem}
+.stat__val{font-size:3.75rem;line-height:1;font-weight:500;letter-spacing:-.025em}
+@media (min-width:640px){.stat__val{font-size:4.5rem}}
+.stat__lbl{font-size:.875rem;line-height:1.25rem;color:rgba(255,255,255,.65);margin-top:.75rem}
+
+/* ---------- testimonials ---------- */
+.testi{background:var(--background);padding:5rem 1.5rem}
+@media (min-width:640px){.testi{padding:6rem 2.5rem}}
+.testi__grid{display:grid;grid-template-columns:1fr;gap:1.25rem;margin-top:3.5rem}
+@media (min-width:768px){.testi__grid{grid-template-columns:repeat(3,1fr)}}
+.testi__grid>li>div{height:100%}
+.tcard{display:flex;flex-direction:column;justify-content:space-between;height:100%;border-radius:var(--radius-card);background:var(--surface);padding:1.75rem}
+.tcard__q{font-size:2.25rem;line-height:1;color:var(--brand);font-weight:500}
+.tcard blockquote{font-size:1.125rem;line-height:1.625;color:var(--ink);margin-top:1rem}
+.tcard figcaption{border-top:1px solid var(--hairline);padding-top:1rem;margin-top:1.5rem}
+.tcard figcaption b{display:block;font-weight:500}
+.tcard figcaption span{display:block;font-size:.875rem;line-height:1.25rem;color:var(--ink-soft)}
+
+/* ---------- footer ---------- */
+.footer{background:var(--brand-deep);color:#fff;border-radius:var(--radius-card-lg);margin-top:.75rem;padding:3.5rem 1.5rem}
+@media (min-width:640px){.footer{padding:4rem 2.5rem}}
+.footer__cta{border-bottom:1px solid rgba(255,255,255,.15);padding-bottom:3.5rem;display:flex;flex-direction:column;gap:2rem}
+@media (min-width:640px){.footer__cta{flex-direction:row;justify-content:space-between;align-items:flex-end}}
+.footer__big{font-size:3.75rem;font-weight:500;line-height:.92;letter-spacing:-.025em;margin-top:1rem}
+@media (max-width:639px){.footer__big{font-size:3rem}}
+.footer__cols{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;padding:3.5rem 0}
+.footer__cols>.fb{grid-column:1/-1}
+@media (min-width:768px){.footer__cols{grid-template-columns:1.4fr 1fr 1fr 1fr}.footer__cols>.fb{grid-column:auto}}
+.fb{max-width:20rem}
+.fb .brand{font-size:1.125rem;line-height:1.75rem}
+.fb .mark{width:1.25rem;height:1.25rem}
+.fb p{font-size:.875rem;line-height:1.25rem;color:rgba(255,255,255,.65);margin-top:1rem}
+.fb address{font-style:normal;margin-top:1.5rem;color:rgba(255,255,255,.8);font-size:.875rem;line-height:1.25rem;display:flex;flex-direction:column;gap:.375rem}
+.fb address a{transition:color .2s;width:max-content}
+.fb address a:hover{color:var(--brand-light)}
+.fb address span{color:rgba(255,255,255,.55)}
+.fcol h3{font-size:.75rem;line-height:1rem;font-weight:500;text-transform:uppercase;letter-spacing:.2em;color:rgba(255,255,255,.5)}
+.fcol ul{margin-top:1.25rem;font-size:.875rem;line-height:1.25rem;color:rgba(255,255,255,.8);display:flex;flex-direction:column;gap:.75rem}
+.fcol a{transition:color .2s}
+.fcol a:hover{color:#fff;text-decoration:underline;text-underline-offset:4px}
+.footer__bar{border-top:1px solid rgba(255,255,255,.15);padding-top:2rem;font-size:.875rem;line-height:1.25rem;color:rgba(255,255,255,.6);display:flex;flex-direction:column;gap:1.25rem}
+@media (min-width:640px){.footer__bar{flex-direction:row;justify-content:space-between;align-items:center}}
+.footer__bar nav ul{display:flex;flex-wrap:wrap;gap:1.25rem}
+.footer__bar a{transition:color .2s}
+.footer__bar a:hover{color:#fff}
+.footer__note{font-size:.75rem;color:rgba(255,255,255,.4);margin-top:1.5rem}
+
+/* ---------- layers (menu / modals) ---------- */
+.layer{position:fixed;inset:0;pointer-events:none}
+.layer.is-open{pointer-events:auto}
+.layer[hidden]{display:none}
+.menu{z-index:70;display:flex;flex-direction:column}
+.menu__bg{position:absolute;inset:0;background:var(--brand-deep);opacity:0}
+.menu__panel{position:relative;height:100%;display:flex;flex-direction:column;color:#fff;padding:2rem;opacity:0}
+@media (min-width:640px){.menu__panel{padding:2.75rem 3.25rem}}
+.menu__top{display:flex;align-items:center;justify-content:space-between}
+.menu__top .brand{font-size:1rem;line-height:1.5rem}
+.menu__top .mark{width:1.25rem;height:1.25rem}
+.menu__close{background:rgba(255,255,255,.15)}
+.menu__close:hover{background:rgba(255,255,255,.25)}
+.menu__nav{flex:1;display:flex;flex-direction:column;justify-content:center;gap:.5rem}
+.menu__nav a{display:block;width:max-content;font-size:3rem;line-height:1.05;font-weight:500;letter-spacing:-.025em;transition:color .25s}
+@media (min-width:640px){.menu__nav a{font-size:4.5rem}}
+.menu__nav a:hover{color:var(--brand-light)}
+.menu__nav a sup{font-size:.75rem;letter-spacing:.1em;vertical-align:top;margin-left:.6rem;color:rgba(255,255,255,.5);font-weight:500}
+.menu__bottom{border-top:1px solid rgba(255,255,255,.15);padding-top:2rem;display:flex;flex-direction:column;gap:1.5rem}
+@media (min-width:640px){.menu__bottom{flex-direction:row;justify-content:space-between;align-items:center}}
+.menu__social{display:flex;flex-wrap:wrap;gap:1.25rem;font-size:.875rem;color:rgba(255,255,255,.7)}
+.menu__social a{transition:color .2s}
+.menu__social a:hover{color:#fff}
+
+.modal{z-index:90;display:flex;align-items:flex-end;justify-content:center;padding:.75rem}
+.modal--info{z-index:95}
+@media (min-width:640px){.modal{align-items:center;padding:1.5rem}}
+.modal__bg{position:absolute;inset:0;background:rgba(15,47,99,.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0}
+.modal__panel{position:relative;width:100%;max-height:92svh;overflow-y:auto;border-radius:var(--radius-card-lg);background:var(--surface-card);padding:1.5rem;color:var(--ink);box-shadow:0 40px 80px -20px rgba(15,47,99,.45);opacity:0;overscroll-behavior:contain}
+@media (min-width:640px){.modal__panel{padding:2rem;max-width:32rem}.modal--info .modal__panel{max-width:36rem}}
+.modal__head{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem}
+.modal__title{font-size:2.25rem;font-weight:500;line-height:.95;letter-spacing:-.025em;margin-top:.75rem}
+@media (min-width:640px){.modal__title{font-size:3rem}}
+.modal__title .clip>span{--dur:800ms}
+.close-btn{background:var(--surface)}
+.close-btn:hover{background:var(--hairline)}
+.form{margin-top:1.75rem;display:flex;flex-direction:column;gap:1rem}
+.form__row{display:grid;gap:1rem}
+@media (min-width:640px){.form__row{grid-template-columns:1fr 1fr}}
+.field{display:flex;flex-direction:column;gap:.5rem}
+.field>span{font-size:.75rem;line-height:1rem;font-weight:500;text-transform:uppercase;letter-spacing:.18em;color:var(--ink-soft)}
+.input{width:100%;border-radius:var(--radius-xl);border:1px solid var(--hairline);background:var(--background);padding:.75rem 1rem;font-size:.875rem;line-height:1.25rem;transition:border-color .2s,box-shadow .2s;appearance:none;-webkit-appearance:none}
+.input::placeholder{color:#a3a8b3}
+.input:focus{outline:none;border-color:var(--brand-light);box-shadow:0 0 0 3px rgba(87,144,230,.25)}
+textarea.input{resize:vertical;min-height:5.5rem}
+select.input{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23717784' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .9rem center;background-size:1rem;padding-right:2.5rem;cursor:pointer}
+.field.has-err .input{border-color:var(--danger)}
+.err{font-size:.75rem;color:var(--danger);font-style:normal}
+.err:empty{display:none}
+.consent{display:flex;gap:.75rem;align-items:flex-start;font-size:.75rem;line-height:1.5;color:var(--ink-soft);cursor:pointer}
+.consent input{appearance:none;-webkit-appearance:none;flex:none;width:1.125rem;height:1.125rem;border:1px solid var(--hairline);border-radius:.35rem;margin-top:.05rem;display:grid;place-items:center;cursor:pointer;transition:background-color .2s,border-color .2s;background:var(--background)}
+.consent input:checked{background:var(--brand);border-color:var(--brand)}
+.consent input:checked::after{content:"";width:.3rem;height:.55rem;border:solid #fff;border-width:0 2px 2px 0;transform:translateY(-1px) rotate(45deg)}
+.consent.has-err input{border-color:var(--danger)}
+.consent a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.consent a:hover{color:var(--brand)}
+.submit{align-self:flex-start;border-radius:var(--radius-pill);background:var(--ink);color:#fff;padding:.875rem 1.75rem;font-size:.875rem;line-height:1.25rem;font-weight:500;text-transform:uppercase;letter-spacing:.025em;transition:background-color .25s,opacity .25s;margin-top:.25rem}
+.submit:hover{background:var(--brand-deep)}
+.submit[disabled]{opacity:.55;cursor:default}
+.success{margin-top:2rem;border-radius:var(--radius-card);background:var(--surface);padding:1.5rem;text-align:center}
+.success__ic{width:3rem;height:3rem;border-radius:var(--radius-pill);background:var(--brand);color:#fff;display:grid;place-items:center;margin:0 auto}
+.success__ic svg{width:1.25rem;height:1.25rem}
+.success h3{font-size:1.125rem;line-height:1.75rem;font-weight:500;margin-top:1rem}
+.success p{font-size:.875rem;line-height:1.25rem;color:var(--ink-soft);margin:.5rem auto 0;max-width:22rem}
+.success .submit{align-self:auto;margin-top:1.25rem}
+
+/* info modal content */
+.info{margin-top:1.5rem;display:flex;flex-direction:column;gap:1.25rem}
+.info__lead{font-size:1rem;line-height:1.55;color:var(--ink-soft)}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.fact{background:var(--surface);border-radius:var(--radius-xl);padding:.75rem 1rem}
+.fact small{display:block;font-size:.65rem;font-weight:500;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-soft)}
+.fact b{display:block;font-weight:500;font-size:.9375rem;margin-top:.25rem;line-height:1.3}
+.checks{display:flex;flex-direction:column;gap:.6rem;font-size:.875rem;line-height:1.4}
+.checks li{display:flex;gap:.6rem;align-items:flex-start}
+.checks svg{width:1rem;height:1rem;color:var(--brand);flex:none;margin-top:.1rem}
+.rows{display:flex;flex-direction:column}
+.rows>li{display:flex;gap:1rem;align-items:center;padding:.9rem 0;border-top:1px solid var(--hairline)}
+.rows>li:last-child{border-bottom:1px solid var(--hairline)}
+.rows .r-main{flex:1;min-width:0}
+.rows .r-main b{display:block;font-weight:500;font-size:.9375rem}
+.rows .r-main span{display:block;font-size:.8rem;color:var(--ink-soft);margin-top:.15rem;line-height:1.4}
+.rows .r-side{font-weight:500;font-size:.9375rem;white-space:nowrap}
+.date-chip{flex:none;width:3.5rem;text-align:center;border-radius:var(--radius-xl);background:var(--brand-deep);color:#fff;padding:.45rem .25rem;font-size:.7rem;font-weight:500;text-transform:uppercase;letter-spacing:.06em;line-height:1.2}
+.rows>li.is-feat{background:linear-gradient(90deg,rgba(87,144,230,.12),transparent);border-radius:var(--radius-xl);padding-left:.75rem;padding-right:.75rem;border-color:transparent}
+.rows>li.is-feat+li{border-top-color:transparent}
+.mini{flex:none;border-radius:var(--radius-pill);border:1px solid var(--hairline);padding:.45rem .9rem;font-size:.7rem;font-weight:500;text-transform:uppercase;letter-spacing:.04em;transition:background-color .2s,color .2s,border-color .2s}
+.mini:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tiers{display:grid;grid-template-columns:1fr;gap:.6rem}
+@media (min-width:640px){.tiers{grid-template-columns:repeat(3,1fr)}}
+.tier{border-radius:var(--radius-card);background:var(--surface);padding:1rem;display:flex;flex-direction:column;gap:.35rem}
+.tier.is-pop{background:var(--brand-deep);color:#fff}
+.tier small{font-size:.65rem;font-weight:500;text-transform:uppercase;letter-spacing:.16em;opacity:.7}
+.tier b{font-size:1.5rem;font-weight:500;line-height:1.1;letter-spacing:-.02em}
+.tier b em{font-style:normal;font-size:.75rem;opacity:.7;letter-spacing:0}
+.tier p{font-size:.75rem;line-height:1.45;opacity:.75;flex:1}
+.tier .mini{align-self:flex-start;margin-top:.4rem}
+.tier.is-pop .mini{border-color:rgba(255,255,255,.3)}
+.tier.is-pop .mini:hover{background:#fff;color:var(--brand-deep)}
+.legal h3{font-size:.9375rem;font-weight:500;margin-top:.25rem}
+.legal p{font-size:.85rem;line-height:1.55;color:var(--ink-soft);margin-top:.35rem}
+.info__actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:.5rem}
+.info__actions .pill--outline{border-color:var(--hairline)}
+.info__actions .pill--outline:hover{border-color:var(--ink)}
+
+/* ---------- loader ---------- */
+.loader{position:fixed;inset:0;z-index:200;background:var(--brand-deep);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;transition:transform 850ms var(--ease-in-out-cubic);will-change:transform}
+.loader.is-out{transform:translateY(-105%)}
+.loader .brand{font-size:1.5rem;line-height:2rem;opacity:0}
+.loader .mark{width:1.75rem;height:1.75rem}
+.loader__track{width:10rem;height:1px;border-radius:var(--radius-pill);background:rgba(255,255,255,.2);overflow:hidden}
+.loader__fill{height:100%;background:#fff;transform:scaleX(0);transform-origin:left;transition:transform 1280ms var(--ease-in-out-cubic) 120ms}
+.loader.is-go .loader__fill{transform:scaleX(1)}
+@media (prefers-reduced-motion:reduce){.loader{transition:none}.loader__fill{transition-duration:200ms;transition-delay:0ms}}
+
+</style>
+<noscript><style>.loader{display:none}.clip>span,.fw>span{transform:none!important;opacity:1!important}[data-iv]{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-ball" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M4.8 5.6A9 9 0 0 0 4.8 18.4"/><path d="M19.2 5.6a9 9 0 0 1 0 12.8"/></g></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<!-- LOADER -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="brand" id="loader-brand"><svg class="mark"><use href="#i-ball"/></svg>Forhend</div>
+  <div class="loader__track"><div class="loader__fill"></div></div>
+</div>
+<script>
+  /* failsafe: never leave the curtain up if the module fails */
+  setTimeout(function(){var l=document.getElementById('loader');if(l&&!window.__forhendBooted){l.remove();document.documentElement.classList.add('fallback')}},6000);
+</script>
+
+<main>
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero__plate" aria-hidden="false">
+      <div class="hero__plate-inner" data-parallax-y="0,12">
+        <img src="https://api.getlayers.ai/storage/v1/object/public/public/assets/baseline-88535e4000/hero/hero-court.webp" alt="Zawodnik w wypadzie po piłkę na korcie twardym" loading="eager" fetchpriority="high" decoding="async">
+      </div>
+    </div>
+
+    <header class="site-header">
+      <nav class="site-header__nav" aria-label="Główna">
+        <a href="#programs">Programy i trenerzy</a>
+        <a href="#facilities">Klub i wydarzenia</a>
+      </nav>
+      <div class="site-header__brand">
+        <a href="#top" class="brand" aria-label="Forhend — strona główna"><svg class="mark"><use href="#i-ball"/></svg>Forhend</a>
+      </div>
+      <div class="site-header__right">
+        <button class="site-header__book" type="button" data-book="visit">Umów wizytę</button>
+        <button class="burger" type="button" id="burger" aria-label="Otwórz menu" aria-expanded="false" aria-controls="menu"><span><i></i><i></i></span></button>
+      </div>
+    </header>
+
+    <div class="hero__title-wrap">
+      <h1 class="hero__title" id="hero-title" data-words="Graj o więcej">Graj o więcej</h1>
+    </div>
+
+    <div class="hero__bottom">
+      <p class="hero__tagline lines" id="hero-tagline">
+        <span class="ln">Przyjdź,</span>
+        <span class="ln">graj lepiej</span>
+      </p>
+      <div class="hero__cluster">
+        <div class="coll" id="coll" aria-roledescription="karuzela" aria-label="Kolekcje sklepu klubowego">
+          <div class="coll__stack glass" id="coll-stack"></div>
+          <div class="dots dots--light" id="coll-dots"></div>
+        </div>
+        <article class="member glass" id="member">
+          <div class="member__left">
+            <b class="member__val">900+</b>
+            <span class="avatars" aria-hidden="true"><i style="background:#5790e6"></i><i style="background:#c2e029"></i><i style="background:#0b6e97"></i><i style="background:#ffffff"></i></span>
+            <span class="member__cap">Członków na kortach</span>
+          </div>
+          <img class="member__img" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/baseline-88535e4000/1.webp" alt="Zawodniczka czekająca na return na korcie ceglanym" loading="lazy" decoding="async">
+          <a href="#membership" class="stretched" aria-label="Zobacz karnety członkowskie"></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section class="trust" id="trenerzy" aria-labelledby="trust-title">
+    <div class="trust__top">
+      <div class="pct" data-iv="scale">
+        <b>100%</b>
+        <small>Trening skrojony pod Twoją grę</small>
+      </div>
+      <article class="badge" data-iv="badge">
+        <span class="badge__chip">#01</span>
+        <div>
+          <h3>Zaufali nam ambitni gracze</h3>
+          <p>Od debiutantów po juniorów z rankingu PZT — trenują u nas, bo postępy widać na tablicy wyników.</p>
+        </div>
+      </article>
+    </div>
+
+    <h2 class="ghost-h" id="trust-title" aria-live="polite">
+      <span class="row">
+        <span class="gw gw--ghost" data-parallax-x="-3,3"><span class="clip"><span></span></span></span>
+        <span class="gw gw--ghost" data-parallax-x="3,-3"><span class="clip"><span></span></span></span>
+      </span>
+      <span class="row">
+        <span class="gw gw--ink" data-parallax-x="-2,4"><span class="clip"><span></span></span></span>
+        <span class="gw gw--ghost" data-parallax-x="4,-3"><span class="clip"><span></span></span></span>
+      </span>
+    </h2>
+
+    <div class="coach-pos">
+      <div data-iv="coach">
+        <figure class="coach" id="coach">
+          <div class="coach__imgs" id="coach-imgs"></div>
+          <figcaption class="cap">
+            <span><span class="cap__name" id="coach-name"></span><span class="cap__role" id="coach-role"></span></span>
+            <span class="cap__go" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
+          </figcaption>
+          <a href="#" class="stretched" id="coach-link" data-book="private"></a>
+        </figure>
+      </div>
+    </div>
+
+    <div class="trust__ctrl">
+      <button class="arrow-btn arrow-btn--outline" type="button" id="trust-prev" aria-label="Poprzedni trener"><span class="ai"><svg class="flip"><use href="#i-arrow"/></svg></span></button>
+      <div class="dots dots--dark" id="trust-dots" role="group" aria-label="Wybierz trenera"></div>
+      <button class="arrow-btn arrow-btn--solid" type="button" id="trust-next" aria-label="Następny trener"><span class="ai"><svg><use href="#i-arrow"/></svg></span></button>
+    </div>
+  </section>
+
+  <!-- PROGRAMS -->
+  <section class="programs" id="programs" aria-labelledby="programs-title">
+    <span class="eyebrow eyebrow--dark">Programy treningowe</span>
+    <h2 class="h2 lines" id="programs-title" data-reveal><span class="ln">Dla każdego</span><span class="ln">poziomu gry</span></h2>
+    <ul class="prog-list" id="prog-list"></ul>
+  </section>
+
+  <!-- FACILITIES -->
+  <section class="facilities" id="facilities" aria-labelledby="facilities-title">
+    <div class="fac-grid">
+      <div class="fac-intro">
+        <img class="fac-icon" data-iv="icon" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/baseline-88535e4000/3.webp" alt="Zawodniczka sięgająca po forhend na mączce" loading="lazy" decoding="async">
+        <h2 class="h2 lines" id="facilities-title" data-reveal><span class="ln">Poznaj</span><span class="ln">nasze korty</span><span class="ln">turniejowe</span></h2>
+        <p class="fac-body" id="fac-body">Zarezerwuj kort na samodzielny trening, zajęcia w grupie albo lekcję prywatną — i trenuj w takich warunkach, w jakich grasz mecze.</p>
+      </div>
+      <div class="courts" id="courts"></div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats" aria-labelledby="stats-title">
+    <span class="eyebrow eyebrow--light">W liczbach</span>
+    <h2 class="h2 lines" id="stats-title" data-reveal><span class="ln">Klub, który</span><span class="ln">liczy punkty</span></h2>
+    <dl class="stats__grid" id="stats-grid"></dl>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testi" id="testimonials" aria-labelledby="testimonials-title">
+    <span class="eyebrow eyebrow--dark">Co mówią gracze</span>
+    <h2 class="h2 lines" id="testimonials-title" data-reveal><span class="ln">Szatnia</span><span class="ln">mówi za nas</span></h2>
+    <ul class="testi__grid" id="testi-grid"></ul>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="contact">
+    <div class="footer__cta">
+      <div>
+        <span class="eyebrow eyebrow--light">Zaczynamy</span>
+        <p class="footer__big lines" data-reveal><span class="ln">Wchodzisz</span><span class="ln">na kort?</span></p>
+      </div>
+      <div data-iv="cta"><button class="pill pill--light" type="button" data-book="visit"><span>Umów wizytę</span><span class="pa"><svg><use href="#i-arrow"/></svg></span></button></div>
+    </div>
+
+    <div class="footer__cols">
+      <div class="fb">
+        <a href="#top" class="brand"><svg class="mark"><use href="#i-ball"/></svg>Forhend</a>
+        <p>Klub i akademia tenisowa, w której rzetelny trening spotyka się z kortami na poziomie turniejowym.</p>
+        <address>
+          <a href="mailto:graj@forhend.pl">graj@forhend.pl</a>
+          <a href="tel:+48715550148">+48 71 555 01 48</a>
+          <span>ul. Kortowa 12, 53-030 Wrocław</span>
+        </address>
+      </div>
+      <nav class="fcol" aria-label="Programy">
+        <h3>Programy</h3>
+        <ul>
+          <li><a href="#junior">Akademia Juniora</a></li>
+          <li><a href="#performance">Grupa Wyczynowa</a></li>
+          <li><a href="#adult">Kursy dla dorosłych</a></li>
+          <li><a href="#private">Treningi indywidualne</a></li>
+        </ul>
+      </nav>
+      <nav class="fcol" aria-label="Klub">
+        <h3>Klub</h3>
+        <ul>
+          <li><a href="#membership">Karnety</a></li>
+          <li><a href="#facilities">Korty</a></li>
+          <li><a href="#club">Wydarzenia</a></li>
+          <li><a href="#shop">Sklep klubowy</a></li>
+        </ul>
+      </nav>
+      <nav class="fcol" aria-label="Firma">
+        <h3>Firma</h3>
+        <ul>
+          <li><a href="#about">O nas</a></li>
+          <li><a href="#trenerzy">Trenerzy</a></li>
+          <li><a href="#careers">Kariera</a></li>
+          <li><a href="#contact">Kontakt</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer__bar">
+      <span>© 2026 Forhend Klub Tenisowy. Wszelkie prawa zastrzeżone.</span>
+      <nav aria-label="Media społecznościowe"><ul data-social></ul></nav>
+      <nav aria-label="Informacje prawne"><ul>
+        <li><a href="#privacy">Polityka prywatności</a></li>
+        <li><a href="#terms">Regulamin</a></li>
+      </ul></nav>
+    </div>
+    <p class="footer__note">Projekt koncepcyjny do portfolio — marka, dane kontaktowe i osoby są fikcyjne.</p>
+  </footer>
+</main>
+
+<!-- MENU OVERLAY -->
+<div class="layer menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu" inert>
+  <div class="menu__bg" data-close></div>
+  <div class="menu__panel">
+    <div class="menu__top">
+      <a href="#top" class="brand"><svg class="mark"><use href="#i-ball"/></svg>Forhend</a>
+      <button class="icon-btn menu__close" type="button" data-close aria-label="Zamknij menu"><span class="xi"><svg><use href="#i-x"/></svg></span></button>
+    </div>
+    <nav class="menu__nav" aria-label="Menu główne">
+      <a href="#programs" data-ml>Programy<sup>01</sup></a>
+      <a href="#facilities" data-ml>Korty<sup>02</sup></a>
+      <a href="#testimonials" data-ml>Opinie<sup>03</sup></a>
+      <a href="#contact" data-ml>Kontakt<sup>04</sup></a>
+    </nav>
+    <div class="menu__bottom">
+      <div><button class="pill pill--light" type="button" data-book="visit"><span>Umów wizytę</span><span class="pa"><svg><use href="#i-arrow"/></svg></span></button></div>
+      <ul class="menu__social" data-social></ul>
+    </div>
+  </div>
+</div>
+
+<!-- BOOKING MODAL -->
+<div class="layer modal" id="booking" inert>
+  <div class="modal__bg" data-close></div>
+  <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="booking-title" data-lenis-prevent>
+    <div class="modal__head">
+      <div>
+        <span class="eyebrow eyebrow--dark">Umów wizytę</span>
+        <h2 class="modal__title lines" id="booking-title"><span class="ln">Zobacz</span><span class="ln">nasze korty</span></h2>
+      </div>
+      <button class="icon-btn close-btn" type="button" data-close aria-label="Zamknij"><span class="xi"><svg><use href="#i-x"/></svg></span></button>
+    </div>
+    <form class="form" id="booking-form" novalidate>
+      <label class="field" data-f="name"><span>Imię i nazwisko</span><input class="input" name="name" type="text" autocomplete="name" placeholder="Anna Kowalczyk"><em class="err"></em></label>
+      <div class="form__row">
+        <label class="field" data-f="email"><span>E-mail</span><input class="input" name="email" type="email" autocomplete="email" placeholder="ty@email.pl"><em class="err"></em></label>
+        <label class="field" data-f="phone"><span>Telefon</span><input class="input" name="phone" type="tel" autocomplete="tel" placeholder="opcjonalnie"><em class="err"></em></label>
+      </div>
+      <label class="field"><span>Temat</span><select class="input" name="topic" id="topic"></select></label>
+      <label class="field"><span>Na czym Ci zależy?</span><textarea class="input" name="message" rows="3" placeholder="Chętnie spróbuję lekcji prywatnej na korcie ceglanym…"></textarea></label>
+      <label class="consent" data-f="consent"><input type="checkbox" name="consent"><span>Wyrażam zgodę na kontakt w sprawie zgłoszenia. Szczegóły w <a href="#privacy">polityce prywatności</a>.</span></label>
+      <em class="err" id="consent-err"></em>
+      <button class="submit" type="submit" id="submit">Wyślij zgłoszenie</button>
+    </form>
+    <div class="success" id="success" hidden>
+      <div class="success__ic"><svg><use href="#i-check"/></svg></div>
+      <h3>Zgłoszenie przyjęte</h3>
+      <p id="success-msg"></p>
+      <button class="submit" type="button" data-close>Gotowe</button>
+    </div>
+  </div>
+</div>
+
+<!-- INFO MODAL -->
+<div class="layer modal modal--info" id="info" inert>
+  <div class="modal__bg" data-close></div>
+  <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="info-title" data-lenis-prevent>
+    <div class="modal__head">
+      <div>
+        <span class="eyebrow eyebrow--dark" id="info-eyebrow"></span>
+        <h2 class="modal__title lines" id="info-title"></h2>
+      </div>
+      <button class="icon-btn close-btn" type="button" data-close aria-label="Zamknij"><span class="xi"><svg><use href="#i-x"/></svg></span></button>
+    </div>
+    <div class="info" id="info-body"></div>
+  </div>
+</div>
+
+
+<script type="module">
+/* =========================================================
+   CONSTANTS
+   ========================================================= */
+const BASE = "https://api.getlayers.ai/storage/v1/object/public/public/assets/baseline-88535e4000/";
+const img = (p) => BASE + p;
+const FONT_BASE = 16, BASE_W = 1920, COEF = 0.6666;
+const MIN_VISIBLE_MS = 1400, MAX_VISIBLE_MS = 2600, EXIT_MS = 850;
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const isMobile = () => innerWidth <= 768;
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+window.__forhendBooted = true;
+
+const COLLECTION = [
+  { img: "2.webp", brand: "Forhend Pro", title: "Polecany sprzęt", cta: "Zobacz zestaw", alt: "Zawodnik zagrywający bekhend na korcie twardym" },
+  { img: "3.webp", brand: "Seria Kortowa", title: "Kolekcja Lato", cta: "Zobacz linię", alt: "Zawodniczka sięgająca po forhend na mączce" },
+  { img: "5.webp", brand: "Strefa Juniora", title: "Linia Junior", cta: "Dla juniorów", alt: "Zawodnik w pozycji wyczekującej na mączce" },
+];
+const COACHES = [
+  { img: "5.webp", name: "Marek Wójcik", role: "Trener główny", alt: "Trener główny w pozycji wyczekującej na mączce", headline: ["Trening", "Pod", "Twój", "Wynik"] },
+  { img: "4.webp", name: "Ewa Sokołowska", role: "Trenerka przygotowania", alt: "Trenerka kończąca ruch serwisu", headline: ["Szybciej", "Mocniej", "Celniej", "Lepiej"] },
+  { img: "1.webp", name: "Jakub Okoń", role: "Koordynator juniorów", alt: "Koordynator juniorów czekający na return na mączce", headline: ["Talent", "Rośnie", "Właśnie", "Tutaj"] },
+];
+const PROGRAMS = [
+  { i: "01", name: "Akademia Juniora", desc: "Podstawy, praca nóg i gra meczowa dla dzieci w wieku 6–14 lat.", href: "#junior" },
+  { i: "02", name: "Grupa Wyczynowa", desc: "Intensywny trening dla zawodników grających turnieje i rankingi.", href: "#performance" },
+  { i: "03", name: "Kursy dla dorosłych", desc: "Zajęcia w małych grupach: technika, kondycja i radość z gry.", href: "#adult" },
+  { i: "04", name: "Treningi indywidualne", desc: "Lekcje jeden na jeden dopasowane do Twoich celów i grafiku.", href: "#private" },
+];
+const COURTS = [
+  { img: "1.webp", tone: "clay", name: "Kort Ceglany", desc: "Szybka, odkryta mączka stworzona do długich, fizycznych wymian.", alt: "Zawodniczka na linii końcowej odkrytego kortu ceglanego" },
+  { img: "4.webp", tone: "blue", name: "Hala Przystań", desc: "Zadaszony kort twardy do precyzyjnej gry — także wieczorem.", alt: "Zawodniczka kończąca uderzenie na niebieskim korcie twardym" },
+];
+const STATS = [
+  { v: "12", l: "Certyfikowanych trenerów" },
+  { v: "8", l: "Kortów turniejowych" },
+  { v: "900+", l: "Członków klubu" },
+  { v: "15", l: "Lat na korcie" },
+];
+const TESTIMONIALS = [
+  { q: "W jeden sezon mój serwis wskoczył poziom wyżej. Trenerzy tłumaczą szczegóły tak, że to naprawdę zostaje w głowie.", n: "Patrycja Nowak", r: "Grupa Wyczynowa" },
+  { q: "Najlepsze korty w mieście i ekipa, która każdego członka klubu traktuje jak zawodnika.", n: "Łukasz Brzeziński", r: "Kursy dla dorosłych" },
+  { q: "Córka przeszła drogę od nieśmiałej początkującej do mistrzyni klubu. Warto było każdej minuty.", n: "Dorota Kamińska", r: "Mama zawodniczki, Akademia Juniora" },
+];
+const SOCIAL = [
+  { n: "Instagram", h: "https://www.instagram.com/" },
+  { n: "Facebook", h: "https://www.facebook.com/" },
+  { n: "YouTube", h: "https://www.youtube.com/" },
+  { n: "TikTok", h: "https://www.tiktok.com/" },
+];
+const TOPICS = {
+  visit: "Pierwsza wizyta w klubie",
+  junior: "Akademia Juniora",
+  performance: "Grupa Wyczynowa",
+  adult: "Kursy dla dorosłych",
+  private: "Trening indywidualny",
+  court: "Rezerwacja kortu",
+  membership: "Karnet członkowski",
+  events: "Wydarzenia i turnieje",
+  shop: "Sklep i sprzęt",
+  careers: "Praca w klubie",
+};
+
+/* info-modal content, keyed by hash */
+const ck = '<svg><use href="#i-check"/></svg>';
+const facts = (arr) => `<div class="facts">${arr.map(([a, b]) => `<div class="fact"><small>${a}</small><b>${b}</b></div>`).join("")}</div>`;
+const checks = (arr) => `<ul class="checks">${arr.map((t) => `<li>${ck}<span>${t}</span></li>`).join("")}</ul>`;
+const INFO = {
+  junior: {
+    eyebrow: "Program 01", lines: ["Akademia", "Juniora"], cta: ["Zapisz dziecko", "junior"],
+    html: () => `<p class="info__lead">Pierwsze kroki na korcie i solidne podstawy na lata. Uczymy przez zabawę, ale zawsze z planem.</p>
+      ${facts([["Wiek", "6–14 lat"], ["Grupy", "do 6 osób"], ["Zajęcia", "2× w tygodniu, 60 min"], ["Cena", "od 380 zł / mies."]])}
+      ${checks(["Ocena poziomu i dobór grupy na pierwszych zajęciach", "Rakiety i piłki dla początkujących w cenie", "Turnieje klubowe co kwartał i dyplom na koniec sezonu"])}`,
+  },
+  performance: {
+    eyebrow: "Program 02", lines: ["Grupa", "Wyczynowa"], cta: ["Umów test poziomu", "performance"],
+    html: () => `<p class="info__lead">Dla zawodników, którzy grają turnieje PZT i chcą zrobić kolejny krok w rankingu.</p>
+      ${facts([["Poziom", "turniejowy"], ["Grupy", "do 4 osób"], ["Zajęcia", "4× w tygodniu, 90 min"], ["Cena", "od 890 zł / mies."]])}
+      ${checks(["Plan periodyzacji i analiza wideo meczów", "Przygotowanie motoryczne z trenerem", "Opieka trenera na wyjazdach turniejowych"])}`,
+  },
+  adult: {
+    eyebrow: "Program 03", lines: ["Kursy dla", "dorosłych"], cta: ["Zajęcia próbne", "adult"],
+    html: () => `<p class="info__lead">Nigdy nie jest za późno, żeby zacząć — ani żeby zacząć grać lepiej.</p>
+      ${facts([["Poziom", "od zera do średnio zaawansowanego"], ["Grupy", "4–6 osób"], ["Zajęcia", "wieczory i weekendy, 75 min"], ["Cena", "od 79 zł / zajęcia"]])}
+      ${checks(["Karnety na 8 i 12 wejść", "Sparingi z osobami na podobnym poziomie", "Pierwsze zajęcia próbne za 49 zł"])}`,
+  },
+  private: {
+    eyebrow: "Program 04", lines: ["Treningi", "indywidualne"], cta: ["Umów lekcję", "private"],
+    html: () => `<p class="info__lead">Jeden trener, jeden zawodnik i plan ułożony pod Twoje cele.</p>
+      ${facts([["Czas", "60 lub 90 min"], ["Terminy", "pn–nd, 7:00–22:00"], ["Trener", "do wyboru"], ["Cena", "od 160 zł / h"]])}
+      ${checks(["Konsultacja celów przed pierwszą lekcją", "Analiza techniki z nagraniem wideo", "Możliwość treningu w parze (split)"])}`,
+  },
+  membership: {
+    eyebrow: "Klub", lines: ["Karnety", "członkowskie"], cta: ["Dobierz karnet", "membership"],
+    html: () => `<p class="info__lead">Graj wtedy, kiedy chcesz. Wybierz członkostwo dopasowane do Twojego rytmu.</p>
+      <div class="tiers">
+        ${[["Start", "149", "4 godziny kortu w miesiącu i rezerwacja 7 dni naprzód."], ["Klub", "249", "10 godzin kortu, −15% na kursy i udział w lidze klubowej.", 1], ["Pro", "399", "Kort bez limitu w godz. 7–16, −25% na treningi i własna szafka."]]
+          .map(([n, p, d, pop]) => `<div class="tier${pop ? " is-pop" : ""}"><small>${n}${pop ? " · najczęściej wybierany" : ""}</small><b>${p} zł <em>/ mies.</em></b><p>${d}</p><button class="mini" type="button" data-book="membership" data-msg="Interesuje mnie karnet ${n}.">Wybieram</button></div>`).join("")}
+      </div>`,
+  },
+  club: {
+    eyebrow: "Klub", lines: ["Wydarzenia", "w klubie"], cta: ["Zapytaj o wydarzenia", "events"],
+    html: () => `<p class="info__lead">Turnieje, ligi i wieczory przy kortach — zawsze jest okazja, żeby zagrać mecz.</p>
+      <ul class="rows">
+        ${[["16 lis", "Turniej Jesienny Forhend", "Singiel open, kategorie amator i junior"], ["co czw.", "Liga Czwartkowa", "Wieczorne mecze deblowe z rankingiem"], ["6 gru", "Mikołajkowy turniej juniorów", "Dzieci 6–12 lat, nagrody dla wszystkich"], ["31 gru", "Sylwestrowy Mikst", "Debel mieszany i wieczór w klubie"]]
+          .map(([d, t, s]) => `<li><span class="date-chip">${d}</span><span class="r-main"><b>${t}</b><span>${s}</span></span><button class="mini" type="button" data-book="events" data-msg="Chcę się zapisać: ${t} (${d}).">Zapisz się</button></li>`).join("")}
+      </ul>`,
+  },
+  shop: {
+    eyebrow: "Sklep klubowy", lines: ["Sprzęt", "z kortu"], cta: ["Zapytaj o sprzęt", "shop"],
+    html: (feat) => `<p class="info__lead">Sprzęt, który sami testujemy na treningach. Zamów przez formularz i odbierz w recepcji klubu.</p>
+      <ul class="rows">
+        ${[["Forhend Pro", "Rakieta 300 g z naciągiem w cenie i pokrowcem", "899 zł"], ["Seria Kortowa — Kolekcja Lato", "Koszulka techniczna i szorty z oddychającej dzianiny", "od 159 zł"], ["Strefa Juniora", "Rakiety 19–25 cali dopasowane do wzrostu dziecka", "od 249 zł"], ["Serwis rakiet", "Naciąganie w 24 godziny, naciąg do wyboru", "od 45 zł"]]
+          .map(([n, d, p], i) => `<li class="${i === feat ? "is-feat" : ""}"><span class="r-main"><b>${n}</b><span>${d}</span></span><span class="r-side">${p}</span><button class="mini" type="button" data-book="shop" data-msg="Chcę zarezerwować: ${n}.">Rezerwuj</button></li>`).join("")}
+      </ul>`,
+  },
+  about: {
+    eyebrow: "O nas", lines: ["Klub", "z charakterem"], cta: ["Odwiedź nas", "visit"],
+    html: () => `<p class="info__lead">Forhend założyliśmy w 2011 roku na wrocławskich Krzykach — z jednym kortem i dużym planem. Dziś to miejsce, w którym trenują całe rodziny.</p>
+      ${facts([["Od", "2011 roku"], ["Korty", "5 ceglanych, 3 w hali"], ["Kadra", "12 trenerów z licencją PZT"], ["Otwarte", "pn–nd, 7:00–22:00"]])}
+      ${checks(["Kawiarnia klubowa i strefa dla rodziców", "Parking dla członków i stojaki na rowery", "Szatnie z prysznicami i sauną"])}`,
+  },
+  careers: {
+    eyebrow: "Kariera", lines: ["Pracuj", "z nami"], cta: ["Wyślij zgłoszenie", "careers"],
+    html: () => `<p class="info__lead">Szukamy ludzi, którzy kochają tenis i lubią uczyć innych.</p>
+      <ul class="rows">
+        ${[["Trener / trenerka tenisa", "Instruktor PZT, pełny etat lub B2B"], ["Recepcja klubowa", "Zmiany popołudniowe, umowa zlecenie"], ["Trener przygotowania motorycznego", "3 dni w tygodniu, praca z grupą wyczynową"]]
+          .map(([t, s]) => `<li><span class="r-main"><b>${t}</b><span>${s}</span></span><button class="mini" type="button" data-book="careers" data-msg="Aplikuję na stanowisko: ${t}.">Aplikuj</button></li>`).join("")}
+      </ul>`,
+  },
+  privacy: {
+    eyebrow: "Informacje prawne", lines: ["Polityka", "prywatności"],
+    html: () => `<div class="legal">
+      <h3>Administrator danych</h3><p>Administratorem danych jest Forhend Klub Tenisowy, ul. Kortowa 12, 53-030 Wrocław (marka fikcyjna — projekt portfolio).</p>
+      <h3>Cel przetwarzania</h3><p>Dane z formularza wykorzystujemy wyłącznie do kontaktu w sprawie zgłoszenia i ustalenia terminu wizyty. Nie przekazujemy ich do celów marketingowych bez Twojej zgody.</p>
+      <h3>Twoje prawa</h3><p>Masz prawo dostępu do danych, ich poprawienia, usunięcia, ograniczenia przetwarzania oraz wniesienia skargi do Prezesa UODO.</p>
+      <h3>Kontakt</h3><p>W sprawach danych osobowych napisz na graj@forhend.pl.</p></div>`,
+  },
+  terms: {
+    eyebrow: "Informacje prawne", lines: ["Regulamin", "klubu"],
+    html: () => `${checks(["Rezerwację kortu można bezpłatnie odwołać do 24 godzin przed terminem.", "Na korty ceglane wchodzimy wyłącznie w obuwiu z podeszwą do mączki.", "Płatności za zajęcia i karnety przyjmujemy z góry — gotówką, kartą lub BLIK-iem.", "Dzieci do 10 lat przebywają na terenie klubu pod opieką dorosłych lub trenera."])}`,
+  },
+};
+
+/* =========================================================
+   ADAPTIVE REM (scale up above 1920)
+   ========================================================= */
+const htmlEl = document.documentElement;
+function adaptFont() {
+  const reduction = ((BASE_W - innerWidth) / BASE_W) * 100 * COEF;
+  const size = FONT_BASE - (FONT_BASE * reduction) / 100;
+  if (size > FONT_BASE) htmlEl.style.fontSize = size + "px";
+  else htmlEl.style.removeProperty("font-size");
+}
+adaptFont();
+addEventListener("resize", adaptFont);
+
+/* =========================================================
+   POLISH TYPOGRAPHY — keep single-letter words with the next one
+   ========================================================= */
+function fixOrphans(root) {
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode: (n) => (/^(SCRIPT|STYLE)$/.test(n.parentNode.nodeName) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT),
+  });
+  let n;
+  while ((n = walker.nextNode())) n.nodeValue = n.nodeValue.replace(/(^|[\s(])([aiouwzAIOUWZ]|na|do|od|po|we|ze|że)\s+/g, "$1$2 ");
+}
+
+/* =========================================================
+   SPRING ENGINE  (react-spring style: tension / friction, mass 1)
+   ========================================================= */
+const PREC = { opacity: 0.001, scale: 0.0005 };
+const active = new Set();
+class Spring {
+  constructor(values, apply, cfg = { tension: 170, friction: 26 }) {
+    this.x = { ...values }; this.t = { ...values }; this.v = {};
+    for (const k in values) this.v[k] = 0;
+    this.cfg = cfg; this.apply = apply; this.onRest = null;
+    apply(this.x);
+  }
+  to(target, cfg, onRest) {
+    for (const k in target) {
+      if (!(k in this.x)) { this.x[k] = target[k]; this.v[k] = 0; }
+      this.t[k] = target[k];
+    }
+    if (cfg) this.cfg = cfg;
+    this.onRest = onRest || null;
+    active.add(this);
+    return this;
+  }
+  set(values) {
+    for (const k in values) { this.x[k] = this.t[k] = values[k]; this.v[k] = 0; }
+    this.apply(this.x);
+    return this;
+  }
+  step(dt) {
+    const { tension, friction } = this.cfg;
+    const h = 0.001, n = Math.max(1, Math.round(dt / h));
+    let moving = false;
+    for (const k in this.t) {
+      let x = this.x[k], v = this.v[k];
+      const t = this.t[k];
+      if (x === t && v === 0) continue;
+      for (let i = 0; i < n; i++) { v += (-tension * (x - t) - friction * v) * h; x += v * h; }
+      const p = PREC[k] ?? 0.05;
+      if (Math.abs(v) < p * 10 && Math.abs(x - t) < p) { x = t; v = 0; } else moving = true;
+      this.x[k] = x; this.v[k] = v;
+    }
+    this.apply(this.x);
+    if (!moving) { active.delete(this); const cb = this.onRest; this.onRest = null; cb && cb(); }
+  }
+}
+const styleApply = (el, u = {}) => (s) => {
+  let tr = "";
+  if ("x" in s || "y" in s) tr += `translate3d(${s.x || 0}${u.x || "px"},${s.y || 0}${u.y || "px"},0)`;
+  if ("scale" in s) tr += ` scale(${s.scale})`;
+  if ("rotate" in s) tr += ` rotate(${s.rotate}deg)`;
+  if (tr) el.style.transform = tr;
+  if ("opacity" in s) el.style.opacity = s.opacity;
+};
+const spring = (el, from, cfg, u) => new Spring(from, styleApply(el, u), cfg);
+
+/* =========================================================
+   READY GATE + IN-VIEW
+   ========================================================= */
+let resolveReady;
+const ready = new Promise((r) => (resolveReady = r));
+const io = new IntersectionObserver((entries) => {
+  for (const e of entries) if (e.isIntersecting) { io.unobserve(e.target); e.target.__iv?.(); }
+}, { rootMargin: "0px 0px -8% 0px", threshold: 0 });
+function onceInView(el, cb) { el.__iv = cb; ready.then(() => io.observe(el)); }
+
+function inview(el, from, to, cfg, delay = 0) {
+  const s = spring(el, from, cfg);
+  onceInView(el, () => setTimeout(() => s.to(to, cfg), delay));
+  return s;
+}
+function hover(trigger, target, from, to, cfg, u) {
+  const s = target.__hs || (target.__hs = spring(target, from, cfg, u));
+  const on = (e) => { if (isMobile() || e?.pointerType === "touch") return; s.to(to, cfg); };
+  const off = () => s.to(from, cfg);
+  trigger.addEventListener("pointerenter", on);
+  trigger.addEventListener("pointerleave", off);
+  trigger.addEventListener("focusin", (e) => { if (e.target.matches(":focus-visible")) s.to(to, cfg); });
+  trigger.addEventListener("focusout", off);
+  return s;
+}
+
+/* text reveals */
+function wrapLines(el, { stagger = 120, base = 0, dur = 950 } = {}) {
+  $$(".ln", el).forEach((ln, i) => {
+    const clip = document.createElement("span");
+    clip.className = "clip";
+    const inner = document.createElement("span");
+    inner.innerHTML = ln.innerHTML;
+    inner.style.setProperty("--d", base + i * stagger + "ms");
+    inner.style.setProperty("--dur", dur + "ms");
+    clip.appendChild(inner);
+    ln.replaceWith(clip, " ");
+  });
+}
+function wrapWords(el, { stagger = 140, dur = 1100 } = {}) {
+  const words = el.textContent.trim().split(/\s+/);
+  el.setAttribute("aria-label", words.join(" "));
+  el.innerHTML = words.map((w, i) => `<span class="clip" aria-hidden="true"><span style="--d:${i * stagger}ms;--dur:${dur}ms">${w}</span></span>`).join(" ");
+}
+function fadeWords(el, { stagger = 28, delay = 250 } = {}) {
+  const words = el.textContent.trim().split(/ +/);
+  el.innerHTML = words.map((w, i) => `<span style="--d:${delay + i * stagger}ms">${w}</span>`).join(" ");
+  el.classList.add("fw");
+}
+function replay(el) {
+  el.classList.add("no-tr");
+  el.classList.remove("is-in");
+  void el.offsetWidth;
+  el.classList.remove("no-tr");
+  void el.offsetWidth;
+  el.classList.add("is-in");
+}
+
+/* =========================================================
+   BUILD DYNAMIC MARKUP
+   ========================================================= */
+const arrowSvg = '<svg><use href="#i-arrow"/></svg>';
+
+// programs
+$("#prog-list").innerHTML = PROGRAMS.map((p) => `
+  <li><a class="prog" href="${p.href}"><div class="prog__in">
+    <span class="prog__idx">${p.i}</span>
+    <span class="prog__txt"><span class="prog__name">${p.name}</span><span class="prog__desc">${p.desc}</span></span>
+    <span class="prog__arrow"><span class="pa">${arrowSvg}</span></span>
+  </div></a></li>`).join("");
+
+// courts
+$("#courts").innerHTML = COURTS.map((c) => `
+  <div><figure class="court">
+    <div class="court__img"><img src="${img(c.img)}" alt="${c.alt}" loading="lazy" decoding="async"></div>
+    <span class="court__book" aria-hidden="true">Zarezerwuj</span>
+    <figcaption class="cap cap--${c.tone}"><span class="cap__name">${c.name}</span><span class="cap__desc">${c.desc}</span></figcaption>
+    <a href="#" class="stretched" data-book="court" data-msg="Chcę zarezerwować: ${c.name}." aria-label="Zarezerwuj ${c.name}"></a>
+  </figure></div>`).join("");
+
+// stats
+$("#stats-grid").innerHTML = STATS.map((s) => `
+  <div class="stat"><dt class="sr-only">${s.l}</dt><dd class="stat__val">${s.v}</dd><dd class="stat__lbl" aria-hidden="true">${s.l}</dd></div>`).join("");
+
+// testimonials
+$("#testi-grid").innerHTML = TESTIMONIALS.map((t) => `
+  <li><div><figure class="tcard">
+    <div><span class="tcard__q" aria-hidden="true">„</span><blockquote>${t.q}</blockquote></div>
+    <figcaption><b>${t.n}</b><span>${t.r}</span></figcaption>
+  </figure></div></li>`).join("");
+
+// social
+$$("[data-social]").forEach((ul) => ul.innerHTML = SOCIAL.map((s) => `<li><a href="${s.h}" target="_blank" rel="noopener noreferrer">${s.n}</a></li>`).join(""));
+
+// topic select
+$("#topic").innerHTML = Object.entries(TOPICS).map(([k, v]) => `<option value="${k}">${v}</option>`).join("");
+
+fixOrphans(document.body);
+
+/* =========================================================
+   TEXT REVEALS
+   ========================================================= */
+const heroTitle = $("#hero-title");
+wrapWords(heroTitle, { stagger: 140, dur: 1100 });
+/* keep the giant title inside its padding (Polish copy runs a little wider) */
+function fitTitle() {
+  heroTitle.style.removeProperty("font-size");
+  const wrap = heroTitle.parentElement, cs = getComputedStyle(wrap);
+  const avail = wrap.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+  const w = heroTitle.scrollWidth;
+  if (w > avail) heroTitle.style.fontSize = (parseFloat(getComputedStyle(heroTitle).fontSize) * avail / w).toFixed(2) + "px";
+}
+fitTitle();
+document.fonts?.ready.then(fitTitle);
+addEventListener("resize", fitTitle);
+const heroTag = $("#hero-tagline");
+wrapLines(heroTag, { base: 350, stagger: 110, dur: 900 });
+$$("[data-reveal]").forEach((el) => {
+  wrapLines(el, { stagger: 120 });
+  onceInView(el, () => el.classList.add("is-in"));
+});
+wrapLines($("#booking-title"), { stagger: 90, dur: 800 });
+const facBody = $("#fac-body");
+fadeWords(facBody, { stagger: 28, delay: 250 });
+onceInView(facBody, () => facBody.classList.add("is-in"));
+
+/* =========================================================
+   IN-VIEW SPRINGS
+   ========================================================= */
+inview($('[data-iv="scale"]'), { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1 }, { tension: 220, friction: 22 });
+inview($('[data-iv="badge"]'), { opacity: 0, y: 24 }, { opacity: 1, y: 0 }, { tension: 200, friction: 26 }, 120);
+inview($('[data-iv="coach"]'), { opacity: 0, y: 60, scale: 0.92 }, { opacity: 1, y: 0, scale: 1 }, { tension: 170, friction: 26 });
+inview($('[data-iv="icon"]'), { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1 }, { tension: 240, friction: 20 });
+inview($('[data-iv="cta"]'), { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, { tension: 200, friction: 24 }, 150);
+
+$$(".prog").forEach((a, i) => {
+  inview($(".prog__in", a), { opacity: 0, y: 26 }, { opacity: 1, y: 0 }, { tension: 190, friction: 26 }, i * 90);
+  hover(a, $(".pa", a), { x: 0, opacity: 0.55 }, { x: 8, opacity: 1 }, { tension: 300, friction: 20 });
+});
+$$("#courts > div").forEach((wrap, i) => {
+  inview(wrap, { opacity: 0, y: 48 }, { opacity: 1, y: 0 }, { tension: 180, friction: 26 }, i * 140);
+  const fig = $(".court", wrap);
+  hover(fig, $(".court__img", fig), { scale: 1 }, { scale: 1.03 }, { tension: 300, friction: 22 });
+});
+$$(".stat").forEach((el, i) => inview(el, { opacity: 0, y: 30 }, { opacity: 1, y: 0 }, { tension: 180, friction: 24 }, i * 110));
+$$("#testi-grid > li > div").forEach((wrap, i) => {
+  inview(wrap, { opacity: 0, y: 40 }, { opacity: 1, y: 0 }, { tension: 180, friction: 26 }, i * 120);
+  const card = $(".tcard", wrap);
+  hover(card, card, { y: 0 }, { y: -8 }, { tension: 300, friction: 22 });
+});
+
+/* shared hovers */
+$$(".pill").forEach((b) => { const a = $(".pa", b); a && hover(b, a, { x: 0 }, { x: 5 }, { tension: 320, friction: 20 }); });
+$$(".arrow-btn").forEach((b) => hover(b, $(".ai", b), { scale: 1 }, { scale: 1.15 }, { tension: 320, friction: 18 }));
+$$(".icon-btn").forEach((b) => { const x = $(".xi", b); x && hover(b, x, { rotate: 0 }, { rotate: 90 }, { tension: 300, friction: 18 }); });
+
+/* =========================================================
+   PARALLAX
+   ========================================================= */
+const parallax = [];
+$$("[data-parallax-y]").forEach((el) => {
+  const [a, b] = el.dataset.parallaxY.split(",").map(Number);
+  parallax.push({ el, sec: el.closest("section"), axis: "Y", a, b });
+});
+$$("[data-parallax-x]").forEach((el) => {
+  const [a, b] = el.dataset.parallaxX.split(",").map(Number);
+  parallax.push({ el, sec: el.closest("section"), axis: "X", a, b });
+});
+function updateParallax() {
+  const vh = innerHeight;
+  for (const p of parallax) {
+    const r = p.sec.getBoundingClientRect();
+    if (r.bottom < -50 || r.top > vh + 50) continue;
+    const prog = Math.min(1, Math.max(0, (vh - r.top) / (vh + r.height)));
+    const v = p.a + (p.b - p.a) * prog;
+    if (p.last === v) continue;
+    p.last = v;
+    p.el.style.transform = `translate${p.axis}(${v.toFixed(3)}%)`;
+  }
+}
+
+/* =========================================================
+   LENIS + LOOP + SCROLL LOCK
+   ========================================================= */
+let lenis = null;
+try {
+  const mod = await import("lenis");
+  const Lenis = mod.default || mod.Lenis;
+  lenis = new Lenis({ smoothWheel: true });
+} catch (e) { console.warn("Lenis niedostępny — przewijanie natywne.", e); }
+
+let last = performance.now();
+function raf(t) {
+  const dt = Math.min(0.05, Math.max(0, (t - last) / 1000));
+  last = t;
+  lenis?.raf(t);
+  for (const s of [...active]) s.step(dt);
+  updateParallax();
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
+if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+window.scrollTo(0, 0);
+
+let locks = 0;
+function lock() {
+  if (locks++ > 0) return;
+  lenis?.stop();
+  Object.assign(htmlEl.style, { position: "relative", overflow: "hidden", height: "100%" });
+}
+function unlock() {
+  if (--locks > 0) return;
+  locks = 0;
+  htmlEl.style.removeProperty("position");
+  htmlEl.style.removeProperty("overflow");
+  htmlEl.style.removeProperty("height");
+  lenis?.start();
+}
+function scrollToTarget(target) {
+  if (target === "top") { lenis ? lenis.scrollTo(0, { duration: 1.4 }) : scrollTo({ top: 0, behavior: "smooth" }); return; }
+  if (lenis) lenis.scrollTo(target, { offset: -8, duration: 1.4 });
+  else target.scrollIntoView({ behavior: "smooth" });
+}
+
+/* =========================================================
+   LOADER
+   ========================================================= */
+lock();
+const loader = $("#loader");
+spring($("#loader-brand"), { opacity: 0, y: 16 }, { tension: 200, friction: 22 }).to({ opacity: 1, y: 0 });
+requestAnimationFrame(() => requestAnimationFrame(() => loader.classList.add("is-go")));
+let started = false;
+function startCountdown() {
+  if (started) return;
+  started = true;
+  setTimeout(reveal, reduceMotion ? 200 : MIN_VISIBLE_MS);
+}
+if (document.readyState === "complete") startCountdown();
+else addEventListener("load", startCountdown, { once: true });
+setTimeout(startCountdown, MAX_VISIBLE_MS);
+
+function reveal() {
+  resolveReady();
+  unlock();
+  loader.classList.add("is-out");
+  setTimeout(() => loader.remove(), reduceMotion ? 0 : EXIT_MS);
+}
+
+/* hero, gated on ready */
+const collEl = $("#coll"), memberEl = $("#member");
+const collSpring = spring(collEl, { opacity: 0, y: 28 }, { tension: 200, friction: 26 });
+const memberSpring = spring(memberEl, { opacity: 0, y: 28 }, { tension: 200, friction: 26 });
+ready.then(() => {
+  heroTitle.classList.add("is-in");
+  heroTag.classList.add("is-in");
+  setTimeout(() => collSpring.to({ opacity: 1, y: 0 }), 650);
+  setTimeout(() => memberSpring.to({ opacity: 1, y: 0 }), 780);
+  startColl();
+  const key = location.hash.slice(1);
+  if (key && INFO[key]) setTimeout(() => openInfo(key), 900);
+});
+
+/* =========================================================
+   DOTS
+   ========================================================= */
+function makeDots(host, n, label, onPick) {
+  host.innerHTML = Array.from({ length: n }, (_, i) => `<button class="dot" type="button" aria-label="${label} ${i + 1}"><i></i></button>`).join("");
+  const btns = $$(".dot", host);
+  btns.forEach((b, i) => b.addEventListener("click", () => onPick(i)));
+  return (idx) => btns.forEach((b, i) => b.setAttribute("aria-current", i === idx ? "true" : "false"));
+}
+
+/* =========================================================
+   HERO COLLECTION SLIDER
+   ========================================================= */
+const collStack = $("#coll-stack");
+let collIdx = 0, collTimer = null, collCard = null;
+const collCfg = { tension: 210, friction: 24 };
+function collCardEl(i) {
+  const c = COLLECTION[i];
+  const el = document.createElement("div");
+  el.className = "coll__card";
+  el.innerHTML = `<img class="coll__img" src="${img(c.img)}" alt="${c.alt}" loading="lazy" decoding="async">
+    <div><div class="coll__brand">${c.brand}</div><div class="coll__title">${c.title}</div>
+    <a class="coll__cta" href="#shop" data-feat="${i}">${c.cta} →</a></div>`;
+  return el;
+}
+const setCollDots = makeDots($("#coll-dots"), COLLECTION.length, "Kolekcja", (i) => { showColl(i); restartColl(); });
+function showColl(i, instant = false) {
+  if (collCard && i === collIdx) return;
+  collIdx = i;
+  setCollDots(i);
+  const next = collCardEl(i);
+  collStack.appendChild(next);
+  const old = collCard;
+  collCard = next;
+  const s = spring(next, instant ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 16, scale: 0.96 }, collCfg);
+  if (!instant) s.to({ opacity: 1, y: 0, scale: 1 }, collCfg);
+  if (old) {
+    old.style.pointerEvents = "none";
+    old.setAttribute("aria-hidden", "true");
+    spring(old, { opacity: 1, y: 0, scale: 1 }, collCfg).to({ opacity: 0, y: 16, scale: 0.96 }, collCfg, () => old.remove());
+  }
+}
+showColl(0, true);
+function startColl() { clearInterval(collTimer); collTimer = setInterval(() => showColl((collIdx + 1) % COLLECTION.length), 3800); }
+function restartColl() { startColl(); }
+collEl.addEventListener("pointerenter", () => { if (!isMobile()) clearInterval(collTimer); });
+collEl.addEventListener("pointerleave", () => ready.then(startColl));
+
+/* =========================================================
+   TRUST — COACH CAROUSEL
+   ========================================================= */
+const ghostWords = $$("#trust-title .gw .clip");
+const coachImgs = $("#coach-imgs");
+const coachName = $("#coach-name"), coachRole = $("#coach-role"), coachLink = $("#coach-link");
+const capSpring = spring($("#coach .cap"), { opacity: 1 }, { tension: 260, friction: 26 });
+let trustIdx = -1;
+const setTrustDots = makeDots($("#trust-dots"), COACHES.length, "Trener", (i) => showCoach(i));
+function showCoach(i) {
+  if (i === trustIdx) return;
+  const first = trustIdx === -1;
+  trustIdx = i;
+  const c = COACHES[i];
+  setTrustDots(i);
+  // ghost words
+  ghostWords.forEach((clip, k) => {
+    clip.firstElementChild.textContent = c.headline[k];
+    clip.firstElementChild.style.setProperty("--d", k * 70 + "ms");
+    if (!first) replay(clip);
+  });
+  $("#trust-title").setAttribute("aria-label", c.headline.join(" "));
+  // photo crossfade
+  const im = new Image();
+  im.src = img(c.img); im.alt = c.alt; im.decoding = "async";
+  if (first) im.loading = "lazy";
+  const olds = $$("img", coachImgs);
+  coachImgs.appendChild(im);
+  const fade = spring(im, { opacity: first ? 1 : 0 }, { tension: 260, friction: 26 });
+  const go = () => fade.to({ opacity: 1 }, { tension: 260, friction: 26 }, () => olds.forEach((o) => o.remove()));
+  if (!first) (im.decode ? im.decode().catch(() => {}) : Promise.resolve()).then(go);
+  // caption
+  coachName.textContent = c.name;
+  coachRole.textContent = c.role;
+  coachLink.dataset.msg = `Chcę umówić trening z: ${c.name} (${c.role.toLowerCase()}).`;
+  coachLink.setAttribute("aria-label", `Umów trening — ${c.name}, ${c.role}`);
+  if (!first) { capSpring.set({ opacity: 0 }); capSpring.to({ opacity: 1 }); }
+}
+showCoach(0);
+onceInView($("#trust-title"), () => ghostWords.forEach((c) => c.classList.add("is-in")));
+$("#trust-prev").addEventListener("click", () => showCoach((trustIdx - 1 + COACHES.length) % COACHES.length));
+$("#trust-next").addEventListener("click", () => showCoach((trustIdx + 1) % COACHES.length));
+$(".trust").addEventListener("keydown", (e) => {
+  if (e.target.closest(".trust__ctrl") && (e.key === "ArrowLeft" || e.key === "ArrowRight")) {
+    showCoach((trustIdx + (e.key === "ArrowRight" ? 1 : -1) + COACHES.length) % COACHES.length);
+  }
+});
+// swipe on coach card (mobile)
+(() => {
+  let sx = null;
+  const card = $("#coach");
+  card.addEventListener("touchstart", (e) => (sx = e.touches[0].clientX), { passive: true });
+  card.addEventListener("touchend", (e) => {
+    if (sx == null) return;
+    const dx = e.changedTouches[0].clientX - sx; sx = null;
+    if (Math.abs(dx) > 40) { card.__swiped = true; showCoach((trustIdx + (dx < 0 ? 1 : -1) + COACHES.length) % COACHES.length); setTimeout(() => (card.__swiped = false), 300); }
+  });
+})();
+
+/* =========================================================
+   LAYERS (menu, booking, info) — stack, focus, Esc
+   ========================================================= */
+const stack = [];
+const FOCUSABLE = 'a[href],button:not([disabled]),input,select,textarea,[tabindex]:not([tabindex="-1"])';
+function makeLayer(el, { bgCfg, panelFrom, panelTo, panelCfg, onOpen, onClose }) {
+  const bg = el.querySelector(".menu__bg,.modal__bg");
+  const panel = el.querySelector(".menu__panel,.modal__panel");
+  const bgS = spring(bg, { opacity: 0 }, bgCfg);
+  const pS = spring(panel, { ...panelFrom }, panelCfg);
+  const L = { el, isOpen: false, returnTo: null };
+  L.open = (...args) => {
+    if (L.isOpen) { onOpen?.(...args); return; }
+    L.isOpen = true;
+    L.returnTo = document.activeElement;
+    el.inert = false;
+    el.classList.add("is-open");
+    stack.push(L);
+    lock();
+    bgS.to({ opacity: 1 }, bgCfg);
+    pS.to({ ...panelTo }, panelCfg);
+    onOpen?.(...args);
+  };
+  L.close = ({ restoreFocus = true } = {}) => {
+    if (!L.isOpen) return;
+    L.isOpen = false;
+    el.classList.remove("is-open");
+    el.inert = true;
+    stack.splice(stack.indexOf(L), 1);
+    bgS.to({ opacity: 0 }, bgCfg);
+    pS.to({ ...panelFrom }, panelCfg);
+    unlock();
+    onClose?.();
+    if (restoreFocus && L.returnTo && document.contains(L.returnTo)) L.returnTo.focus({ preventScroll: true });
+  };
+  el.addEventListener("click", (e) => { if (e.target.closest("[data-close]")) { e.preventDefault(); L.close(); } });
+  return L;
+}
+document.addEventListener("keydown", (e) => {
+  const top = stack[stack.length - 1];
+  if (!top) return;
+  if (e.key === "Escape") { e.preventDefault(); top.close(); }
+  if (e.key === "Tab") {
+    const f = $$(FOCUSABLE, top.el).filter((n) => n.offsetParent !== null || n === document.activeElement);
+    if (!f.length) return;
+    const first = f[0], lastF = f[f.length - 1];
+    if (!top.el.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+    else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); lastF.focus(); }
+    else if (!e.shiftKey && document.activeElement === lastF) { e.preventDefault(); first.focus(); }
+  }
+});
+
+/* menu */
+const menuEl = $("#menu"), burger = $("#burger");
+const menuLinks = $$("[data-ml]", menuEl).map((a) => spring(a, { opacity: 0, y: 28 }, { tension: 200, friction: 26 }));
+let menuTimers = [];
+const menu = makeLayer(menuEl, {
+  bgCfg: { tension: 260, friction: 30 },
+  panelFrom: { opacity: 0, y: -24 }, panelTo: { opacity: 1, y: 0 }, panelCfg: { tension: 220, friction: 28 },
+  onOpen() {
+    burger.setAttribute("aria-expanded", "true");
+    menuTimers.forEach(clearTimeout);
+    menuLinks.forEach((s, i) => { s.set({ opacity: 0, y: 28 }); menuTimers.push(setTimeout(() => s.to({ opacity: 1, y: 0 }), 120 + i * 70)); });
+    setTimeout(() => $(".menu__close", menuEl).focus({ preventScroll: true }), 60);
+  },
+  onClose() { burger.setAttribute("aria-expanded", "false"); menuTimers.forEach(clearTimeout); },
+});
+burger.addEventListener("click", () => menu.open());
+
+/* booking */
+const bookingEl = $("#booking"), form = $("#booking-form"), success = $("#success"), submitBtn = $("#submit");
+let resetTimer = null;
+const booking = makeLayer(bookingEl, {
+  bgCfg: { tension: 240, friction: 30 },
+  panelFrom: { opacity: 0, y: 28, scale: 0.96 }, panelTo: { opacity: 1, y: 0, scale: 1 }, panelCfg: { tension: 240, friction: 26 },
+  onOpen(topic = "visit", msg = "") {
+    clearTimeout(resetTimer);
+    if (!success.hidden) resetForm();
+    if (TOPICS[topic]) form.topic.value = topic;
+    if (msg) form.message.value = msg;
+    replay($("#booking-title"));
+    $(".modal__panel", bookingEl).scrollTop = 0;
+    setTimeout(() => form.name.focus({ preventScroll: true }), 120);
+  },
+  onClose() { resetTimer = setTimeout(resetForm, 350); },
+});
+function resetForm() {
+  form.reset();
+  form.hidden = false;
+  success.hidden = true;
+  submitBtn.disabled = false;
+  submitBtn.textContent = "Wyślij zgłoszenie";
+  $$(".has-err", form).forEach((n) => n.classList.remove("has-err"));
+  $$(".err", bookingEl).forEach((n) => (n.textContent = ""));
+}
+function setErr(key, msg) {
+  const host = key === "consent" ? $('[data-f="consent"]', form) : $(`[data-f="${key}"]`, form);
+  host.classList.toggle("has-err", !!msg);
+  (key === "consent" ? $("#consent-err") : $(".err", host)).textContent = msg || "";
+}
+function validate() {
+  const name = form.name.value.trim(), email = form.email.value.trim(), phone = form.phone.value.trim();
+  const errs = {
+    name: name.length < 2 ? "Podaj imię i nazwisko." : "",
+    email: !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) ? "Podaj poprawny adres e-mail." : "",
+    phone: phone && !/^[+\d][\d\s-]{6,}$/.test(phone) ? "Sprawdź numer telefonu." : "",
+    consent: !form.consent.checked ? "Zaznacz zgodę, abyśmy mogli się odezwać." : "",
+  };
+  Object.entries(errs).forEach(([k, v]) => setErr(k, v));
+  const firstBad = Object.keys(errs).find((k) => errs[k]);
+  if (firstBad) form[firstBad].focus();
+  return !firstBad;
+}
+["name", "email", "phone"].forEach((k) => form[k].addEventListener("input", () => $(`[data-f="${k}"]`, form).classList.contains("has-err") && setErr(k, "")));
+form.consent.addEventListener("change", () => form.consent.checked && setErr("consent", ""));
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (submitBtn.disabled || !validate()) return;
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Wysyłanie…";
+  // stub: no network request
+  setTimeout(() => {
+    const first = form.name.value.trim().split(/\s+/)[0];
+    $("#success-msg").textContent = `Dzięki, ${first || "do usłyszenia"} — nasz zespół odezwie się wkrótce, żeby ustalić termin wizyty.`;
+    form.hidden = true;
+    success.hidden = false;
+    $(".submit", success).focus({ preventScroll: true });
+  }, 900);
+});
+
+/* info */
+const infoEl = $("#info");
+const info = makeLayer(infoEl, {
+  bgCfg: { tension: 240, friction: 30 },
+  panelFrom: { opacity: 0, y: 28, scale: 0.96 }, panelTo: { opacity: 1, y: 0, scale: 1 }, panelCfg: { tension: 240, friction: 26 },
+});
+function openInfo(key, feat) {
+  const d = INFO[key];
+  if (!d) return;
+  $("#info-eyebrow").textContent = d.eyebrow;
+  const title = $("#info-title");
+  title.innerHTML = d.lines.map((l) => `<span class="ln">${l}</span>`).join("");
+  wrapLines(title, { stagger: 90, dur: 800 });
+  const actions = d.cta
+    ? `<div class="info__actions"><button class="pill pill--solid" type="button" data-book="${d.cta[1]}"><span>${d.cta[0]}</span><span class="pa">${arrowSvg}</span></button><button class="pill pill--outline" type="button" data-close>Zamknij</button></div>`
+    : `<div class="info__actions"><button class="pill pill--outline" type="button" data-close>Zamknij</button></div>`;
+  const body = $("#info-body");
+  body.innerHTML = d.html(feat == null ? -1 : +feat) + actions;
+  fixOrphans(body);
+  $$(".pill", body).forEach((b) => { const a = $(".pa", b); a && hover(b, a, { x: 0 }, { x: 5 }, { tension: 320, friction: 20 }); });
+  $(".modal__panel", infoEl).scrollTop = 0;
+  info.open();
+  replay(title);
+  setTimeout(() => $(".close-btn", infoEl).focus({ preventScroll: true }), 120);
+}
+
+/* =========================================================
+   GLOBAL CLICK ROUTING — every link/button does something
+   ========================================================= */
+document.addEventListener("click", (e) => {
+  const bookBtn = e.target.closest("[data-book]");
+  if (bookBtn) {
+    e.preventDefault();
+    if ($("#coach").__swiped && bookBtn.id === "coach-link") return;
+    const topic = bookBtn.dataset.book, msg = bookBtn.dataset.msg || "";
+    if (info.isOpen) info.close({ restoreFocus: false });
+    if (menu.isOpen) menu.close({ restoreFocus: false });
+    booking.open(topic, msg);
+    return;
+  }
+  const a = e.target.closest('a[href^="#"]');
+  if (!a) return;
+  const key = a.getAttribute("href").slice(1);
+  e.preventDefault();
+  if (key === "top" || key === "") {
+    stack.slice().reverse().forEach((L) => L.close({ restoreFocus: false }));
+    scrollToTarget("top");
+    return;
+  }
+  if (INFO[key]) { openInfo(key, a.dataset.feat); return; }
+  const target = document.getElementById(key);
+  if (target) {
+    stack.slice().reverse().forEach((L) => L.close({ restoreFocus: false }));
+    requestAnimationFrame(() => scrollToTarget(target));
+  }
+});
+</script>
+</body>
+</html>
