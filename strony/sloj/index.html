@@ -963,29 +963,29 @@ input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.15); }
     </div>
     <div class="footer-bottom">
       <span>© 2026 Słój · NIP {{nip}}</span>
-      <span>Firma fikcyjna, projekt do portfolio · {{twoje imię}}</span>
+      <span>Firma fikcyjna, projekt do portfolio · {{twoje imię}} · Zdjęcia: <a href="https://www.pexels.com" style="color:inherit">Pexels</a></span>
     </div>
   </div>
 </footer>
 
 <script>
 /* ============================================================
-   ZDJĘCIA: wklej tu adresy (np. z Unsplash). Puste = szary kafelek.
-   Najlepiej z dopiskiem ?w=1600&q=80&auto=format&fit=crop
+   ZDJĘCIA: darmowe zdjęcia z Pexels (pexels.com/photo/...-NUMER).
+   Żeby podmienić, zmień numer w adresie. Puste = szary kafelek.
    ============================================================ */
 const PHOTOS = {
-  hero:     "",  // stolarz przy pracy, warsztat, poziome
-  kuchnia:  "",  // kuchnia z dębowymi frontami
-  szafa:    "",  // garderoba lub szafa w zabudowie
-  schody:   "",  // drewniane schody we wnętrzu
-  stol:     "",  // stół z litego drewna w jadalni
-  lazienka: "",  // drewniana szafka łazienkowa
-  real1:    "",  // realizacje: 6 zdjęć gotowych mebli
-  real2:    "",
-  real3:    "",
-  real4:    "",
-  real5:    "",
-  real6:    ""
+  hero:     "https://images.pexels.com/photos/374861/pexels-photo-374861.jpeg?auto=compress&cs=tinysrgb&w=2000",  // stolarz przy pracy, warsztat, poziome
+  kuchnia:  "https://images.pexels.com/photos/100575/pexels-photo-100575.jpeg?auto=compress&cs=tinysrgb&w=1200",  // kuchnia z dębowymi frontami
+  szafa:    "https://images.pexels.com/photos/6585617/pexels-photo-6585617.jpeg?auto=compress&cs=tinysrgb&w=1200",  // garderoba lub szafa w zabudowie
+  schody:   "https://images.pexels.com/photos/922793/pexels-photo-922793.jpeg?auto=compress&cs=tinysrgb&w=1200",  // drewniane schody we wnętrzu
+  stol:     "https://images.pexels.com/photos/3773579/pexels-photo-3773579.jpeg?auto=compress&cs=tinysrgb&w=1200",  // stół z litego drewna w jadalni
+  lazienka: "https://images.pexels.com/photos/5869312/pexels-photo-5869312.jpeg?auto=compress&cs=tinysrgb&w=1200",  // drewniana szafka łazienkowa
+  real1:    "https://images.pexels.com/photos/4119836/pexels-photo-4119836.jpeg?auto=compress&cs=tinysrgb&w=1200",  // realizacje: 6 zdjęć gotowych mebli
+  real2:    "https://images.pexels.com/photos/8134812/pexels-photo-8134812.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  real3:    "https://images.pexels.com/photos/4577688/pexels-photo-4577688.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  real4:    "https://images.pexels.com/photos/4044798/pexels-photo-4044798.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  real5:    "https://images.pexels.com/photos/8092196/pexels-photo-8092196.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  real6:    "https://images.pexels.com/photos/10153052/pexels-photo-10153052.jpeg?auto=compress&cs=tinysrgb&w=1200"
 };
 
 const PH_LABELS = {
