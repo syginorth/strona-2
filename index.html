@@ -414,6 +414,7 @@ select.input{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w
 @media (prefers-reduced-motion:reduce){.loader{transition:none}.loader__fill{transition-duration:200ms;transition-delay:0ms}}
 
 </style>
+<style>.fallback .clip>span,.fallback .fw>span{transform:none!important;opacity:1!important}.fallback [data-iv],.fallback #coll,.fallback #member{opacity:1!important;transform:none!important}</style>
 <noscript><style>.loader{display:none}.clip>span,.fw>span{transform:none!important;opacity:1!important}[data-iv]{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
@@ -707,7 +708,6 @@ const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const isMobile = () => innerWidth <= 768;
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-window.__forhendBooted = true;
 
 const COLLECTION = [
   { img: "2.webp", brand: "Forhend Pro", title: "Polecany sprzęt", cta: "Zobacz zestaw", alt: "Zawodnik zagrywający bekhend na korcie twardym" },
@@ -1103,11 +1103,12 @@ function updateParallax() {
    LENIS + LOOP + SCROLL LOCK
    ========================================================= */
 let lenis = null;
-try {
-  const mod = await import("lenis");
+// Not awaited: a slow CDN must not hold the loader up.
+import("lenis").then((mod) => {
   const Lenis = mod.default || mod.Lenis;
   lenis = new Lenis({ smoothWheel: true });
-} catch (e) { console.warn("Lenis niedostępny — przewijanie natywne.", e); }
+  if (locks > 0) lenis.stop();
+}).catch((e) => console.warn("Lenis niedostępny — przewijanie natywne.", e));
 
 let last = performance.now();
 function raf(t) {
@@ -1161,6 +1162,7 @@ else addEventListener("load", startCountdown, { once: true });
 setTimeout(startCountdown, MAX_VISIBLE_MS);
 
 function reveal() {
+  window.__forhendBooted = true;
   resolveReady();
   unlock();
   loader.classList.add("is-out");
@@ -1224,10 +1226,17 @@ function showColl(i, instant = false) {
   }
 }
 showColl(0, true);
-function startColl() { clearInterval(collTimer); collTimer = setInterval(() => showColl((collIdx + 1) % COLLECTION.length), 3800); }
+function startColl() {
+  clearInterval(collTimer);
+  // A card swap removes the focused link, so stay still while the keyboard is inside.
+  if (reduceMotion || collEl.contains(document.activeElement)) return;
+  collTimer = setInterval(() => showColl((collIdx + 1) % COLLECTION.length), 3800);
+}
 function restartColl() { startColl(); }
 collEl.addEventListener("pointerenter", () => { if (!isMobile()) clearInterval(collTimer); });
 collEl.addEventListener("pointerleave", () => ready.then(startColl));
+collEl.addEventListener("focusin", () => clearInterval(collTimer));
+collEl.addEventListener("focusout", (e) => { if (!collEl.contains(e.relatedTarget)) ready.then(startColl); });
 
 /* =========================================================
    TRUST — COACH CAROUSEL
